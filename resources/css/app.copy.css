@@ -1,0 +1,255 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.body-content{
+	max-height: 300px !important;
+	overflow-y: scroll;
+}
+
+.trix-button-group--history-tools{
+	display: none !important;
+}
+
+.errno{
+	color: rgba(255, 0, 0, 1.0);
+}
+
+#title{
+	font-family: 'Exo 2','sans-serif';
+    font-size: 3.3vw;
+    text-align: center;
+    color: whitesmoke;
+    padding-top: 18%;
+}
+
+#FrontPageLogo{
+    max-width: 90%; 
+}
+
+#FrontPageLogoContainer{
+	padding:1%; 
+	width:25vw;
+	display: inline-block
+}
+
+#FrontPageFlex{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.linkButton{
+	margin-top: 1vw;
+	margin-right: 1vw;
+	justify-content: center;
+}
+
+
+#FrontaPageContent{
+    background: #050000;
+
+	animation-name: fade-in;
+	animation-duration: 2s;	
+}
+#frontpagebg{
+	background-image: url('/image/svg/backgroudn.svg');
+}
+
+#eventCard{
+    background: lemonchiffon;
+}
+
+#card{
+    transition: all 1s ease;
+}
+
+#card:hover{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.10), 0 6px 20px 0 rgba(0, 0, 0, 0.80);
+    -webkit-filter: brightness(100%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+#eventTitle{
+    background: #050000;
+    color: white;
+}
+#carousel-orgs-inner{
+    z-index: -10;
+    margin: -10;
+}
+
+
+.item{
+    width: 50%;
+    margin: auto;
+    transition: all 1s ease;
+}
+.item:hover{
+    width: 85%;
+    -webkit-filter: brightness(100%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+
+#orgLinks{
+	display: flex;
+	flex-direction: column;	
+	align-items: center;
+}
+
+#linkContainer{
+	padding-top: 1%;
+	padding-bottom: 1%;
+	background: rgba(50, 50, 50, 1.0);
+	margin-top: 1%;
+	margin-bottom: 1%;
+	color: rgba(255, 255, 255, 1.0);
+	text-align: center;
+}
+
+#link{
+	width: 100%;
+}
+
+hr{
+	padding-top: 5%;
+	padding-bottom: 1%;
+}
+
+
+
+
+
+
+/* carousel  */
+.carousel-open:checked+.carousel-item {
+          position: static;
+          opacity: 100;
+        }
+      
+        .carousel-item {
+          -webkit-transition: opacity 0.6s ease-out;
+          transition: opacity 0.6s ease-out;
+        }
+      
+        #carousel-1:checked~.control-1,
+        #carousel-2:checked~.control-2,
+        #carousel-3:checked~.control-3 {
+          display: block;
+        }
+      
+        .carousel-indicators {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          position: absolute;
+          bottom: 2%;
+          left: 0;
+          right: 0;
+          text-align: center;
+          z-index: 10;
+        }
+      
+        #carousel-1:checked~.control-1~.carousel-indicators li:nth-child(1) .carousel-bullet,
+        #carousel-2:checked~.control-2~.carousel-indicators li:nth-child(2) .carousel-bullet,
+        #carousel-3:checked~.control-3~.carousel-indicators li:nth-child(3) .carousel-bullet {
+          color: #2b6cb0;
+          /*Set to match the Tailwind colour you want the active one to be */
+        }
+
+.carousel-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#carousel-items-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#carousel-center-title{
+	font-family: 'Kaushan Script', sans-serif;
+	font-size: 5vw;
+	color: white;
+    transition: all 1s ease;
+}
+#carousel-center-title:hover{
+	color: rgba(255, 255, 255, .7);
+    -webkit-filter: brightness(100%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+
+#carousel-image-logo{
+	max-width: 50%;
+  	height: auto;
+    transition: all 1s ease;
+    -webkit-filter: brightness(100%);
+}
+
+#carousel-image-logo:hover{
+	max-width: 70%;
+  	height: auto;
+  	-webkit-filter: brightness(20%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+#carousel-background{
+    -webkit-filter: brightness(100%);
+    transition: all 1s ease;
+}
+
+#carousel-background:hover{
+	-webkit-filter: brightness(20%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+
+}
+
+#orgNav{
+    background: rgb(29,0,0);
+background: linear-gradient(200deg, rgba(29,0,0,1) 0%, rgba(128,0,0,1) 51%,  rgba(255,215,0,1) 100%);
+}
+
+
+#orgNavLinks{
+	font-family: 'Oxygen', sans-serif;
+}
+
+
+/*  ANIMATION  */
+@keyframes fade-in {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+
+/* RESPONSIVE  */
+@media(max-width: 900px){
+	#title{
+		padding-top: 1%;
+	}
+}
