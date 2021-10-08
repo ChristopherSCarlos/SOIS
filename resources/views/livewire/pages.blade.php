@@ -30,7 +30,7 @@
                             <tr>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Title</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Link</th>
-                                <!-- <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Content</th> -->
+                                <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Content</th>
                                 <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Action</th>
                             </tr>
                         </thead>
@@ -48,10 +48,9 @@
                                                 {{ $item->slug }}
                                             </a>
                                         </td>
-                                       <!--  <td class="px-6 py-4 text-sm whitespace-no-wrap">
+                                        <td class="px-6 py-4 text-sm whitespace-no-wrap">
                                             {!! \Illuminate\Support\Str::limit($item->content, 50, '...') !!}
-                                            {!! $item->content !!}
-                                        </td> -->
+                                        </td>
                                         <td class="px-6 py-4 text-sm text-right">
                                             <x-jet-button wire:click="updateShowModal({{ $item->id }})">
                                                 {{__('Update')}}

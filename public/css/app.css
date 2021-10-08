@@ -2235,15 +2235,6 @@ hr{
   margin-top: 5%;
   /*margin: auto;*/
 }
-.frontpage-content{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5%;
-  /*margin: auto;*/
-}
 .frontpage-title-image{
   margin: auto;
   /*width: 80%;*/
