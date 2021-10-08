@@ -135,12 +135,16 @@
                 <div class="frontpage-title-title-container">
                     <p class="frontpage-title-title">{{ $title }}</p>
                 </div>
-                <div>
-                    {!! $PageData->content !!}
-                </div>
             </div>
   </div>
 </div>
+<main id="frontpagebg" class="bg-gray-100 min-h-screen sm:w-12/12 md:w-12/12 lg:w-12/12 bg-cover bg-center" style="background: #0a0000;">
+    <div class="frontpage-content">
+        <div>
+            {!! $PageData->content !!}
+        </div>
+    </div>
+</main>
             
             <main id="frontpagebg" class="bg-gray-100 min-h-screen sm:w-12/12 md:w-12/12 lg:w-12/12 bg-cover bg-center" style="background: #0a0000;">
                 
