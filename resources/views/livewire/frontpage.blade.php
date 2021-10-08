@@ -135,6 +135,9 @@
                 <div class="frontpage-title-title-container">
                     <p class="frontpage-title-title">{{ $title }}</p>
                 </div>
+                <div>
+                    {!! $PageData->content !!}
+                </div>
             </div>
   </div>
 </div>

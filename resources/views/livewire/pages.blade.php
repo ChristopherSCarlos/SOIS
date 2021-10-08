@@ -7,6 +7,11 @@
 
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+    <style>
+        .modal-backdrop {
+          z-index: -1;
+        }
+    </style>
 
 
     <div class="flex items-center justify-end px-4 py-3 text-right sm:px-6">
