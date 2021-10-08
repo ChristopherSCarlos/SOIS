@@ -136,34 +136,9 @@
                 <div class="frontpage-title-title-container">
                     <p class="frontpage-title-title">{{ $title }}</p>
                 </div>
-                <div>
-                    {!! $PageData->content !!}
-                </div>
             </div>
   </div>
 </div>
-<<<<<<< HEAD
-=======
-            
-            <main id="frontpagebg" class="bg-gray-100 min-h-screen sm:w-12/12 md:w-12/12 lg:w-12/12 bg-cover bg-center" style="background: #0a0000;">
-                
-
-                <div class="event-container grid grid-cols-2">
-                    <div class="event-header-container shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl cursor-pointer">
-                        <div>
-                            <p id="frontpage-quotation" class="frontpage-grid-item-for-quote" data-aos="fade-up-left">Excellence is not a skill. It is an attitude</p>
-                            <p id="frontpage-quotation-author" class="frontpage-grid-item-for-quote" data-aos="fade-up-left">Hedley Marston</p>
-                        </div>
-                    </div>
-                    <div id="content" class="event-card-container">
-                        <div id="frontpage-quote-image" class="shadow-lg transition duration-500 ease-in-out transform hover:-translate-y-5 hover:shadow-2xl rounded-lg  cursor-pointer">
-                                <img alt="blog photo" src="{{ asset('image/hedley marston.jpg') }}" data-aos="fade-up" class=""/>            
-                        </div>
-                    </div>
-            </main>
-
-
->>>>>>> parent of ff17079 (display stuff on pages)
 
         @endif
 
