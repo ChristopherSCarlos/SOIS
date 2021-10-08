@@ -62,4 +62,4 @@ Route::group(['middleware' => [
 
 
 Route::get('/{urlslug}', FrontPage::class);
-Route::get('/student-organization-information-system', FrontPage::class);
+Route::get('/', FrontPage::class);

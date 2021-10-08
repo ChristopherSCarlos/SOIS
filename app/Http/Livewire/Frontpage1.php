@@ -39,48 +39,6 @@ class Frontpage extends Component
     public $orgData;
     public $orgDataCount;
 
-    public $systemPagesDataForSlugSelection;
-    public $organizationPagesDataForSlugSelection;
-    public $organizationPagesDataForSlugSelectionId;
-    public $organiationDataForNewsSelection;
-    public $organiationPivotDataForNewsSelection;
-
-    public $isOrgWebPageVisible = false;
-    
-    public $urlSlugOrganizationData;
-
-    public $isOrgDataSimilarWithCurrentSlug = false;
-    public $getOrganizationAllData;
-    public $getOrganizationData;
-    private $orgTableDataIdForCurrentSlugId;
-    public $OrgDataInArticles;
-    public $orgTableDataIdHolder;
-    public $orgTableDataIdArray = [];
-
-    public $orgTableGetUserIdInOrganizationData;
-    public $isArtcilesInOrganization;
-
-    public $findOrgData;
-
-    public function selectSlugForSystemPagesViews()
-    {
-        $this->systemPagesDataForSlugSelection = DB::table('pages')
-                                    ->orderBy('id','asc')
-                                    ->get()
-                                    ->pluck('slug');
-        // dd($this->systemPagesDataForSlugSelection);                                    
-        return $this->systemPagesDataForSlugSelection;
-    }
-    public function selectSlugForOrganizationPagesViews()
-    {
-        $this->organizationPagesDataForSlugSelection = DB::table('organizations')
-                                    ->orderBy('id','asc')
-                                    ->get()
-                                    ->pluck('organization_slug');
-        // dd($this->organizationPagesDataForSlugSelection);                                    
-        return $this->organizationPagesDataForSlugSelection;
-    }
-
     public function getArticleOrganization()
     {
         // dd($this->urlslug);
@@ -92,76 +50,37 @@ class Frontpage extends Component
         //    ->where('user_id', '=', $this->userId)
         //    ->get();
 
-        // dd($this->urlslug);
+        $this->orgTableData = DB::table('organizations')
+           ->where('organization_slug', '=', $this->urlslug)
+           ->first();
+           // ->get()
+           // ->pluck('id');
 
-        // GET ORGANIZATION DATA OF CURRENT ORGANIZATION WEBPAGE AND COMPARE IT TO THE SLUG
-        $this->orgTableDataIdForCurrentSlugId = DB::table('organizations')->where('organization_slug','=',$this->urlslug)->first(); 
-
-        // IF DATA EXISTS
-        if($this->orgTableDataIdForCurrentSlugId){
-            // $this->orgTableGetUserIdInOrganizationData = DB::table('organizations')->where('')
-            // GET ORGANIZATION ID of user IN organization_user PIVOT TABLE
-            // $this->orgTableDataId = DB::table('organization_user')
-            //                         ->where('organization_id', '=', $this->orgTableDataIdForCurrentSlugId->id)
-            //                         ->first();
-            //                         // ->get()
-            //                         // ->pluck('organization_id');
-
-            // $this->orgTableDataIdHolder = $this->orgTableDataId->organization_id;
-            // dd($this->orgTableDataId);
-
-            $this->OrgDataInArticles = Organization::find($this->orgTableDataIdForCurrentSlugId->id);
-            // dd($this->OrgDataInArticles);
-            // dd($this->OrgDataInArticles->articles);
-            // // return $this->OrgDataInArticles->articles;
-            // // dd($this->OrgDataInArticles);
-            // // dd(gettype($this->OrgDataInArticles));
-            foreach ($this->OrgDataInArticles->articles as $OrgArticlesCurrentSlug) {
-                $this->orgTableDataIdArray[] = $OrgArticlesCurrentSlug->pivot->article_id;
-            }
-            return $this->orgTableDataIdArray;
-            // dd($this->orgTableDataIdArray);
-            // return $this->orgTableDataIdArray;
-            // $this->orgTableDataId = $this->orgTableData;
-
-            // $this->getOrganizationData = DB::table('')
-
-            // dd(gettype($this->orgTableDataIdForCurrentSlugId->id));
-            // dd("Hello");
-        }
-        // IF DATA DOESNT EXISTS
-        else{
-            // dd("world");
-        }
-
-
-        
-        // dd($this->orgTableDataId);
         // dd(gettype($this->orgTableData));
         // dd($this->orgTableData);
 
-        // $this->orgTableDataId = $this->orgTableData->id;
+        $this->orgTableDataId = $this->orgTableData->id;
         // $this->orgTableDataId = $this->orgTableData;
 
         // dd($this->orgTableDataId);
         
-        // $this->orgData = Organization::find($this->orgTableDataId);
+        $this->orgData = Organization::find($this->orgTableDataId);
         // dd($this->orgData->articles->id);
         
         // // return $this->orgData->articles;
         // // // dd($orgData->roles);
-        // foreach ($this->orgData->articles as $this->arts) {
-            // $this->orgArticle[] = $this->arts->pivot->article_id;
+        foreach ($this->orgData->articles as $this->arts) {
+            $this->orgArticle[] = $this->arts->pivot->article_id;
             // $this->orgArticle = $this->arts->pivot->article_id;
             // echo $role->pivot->role_id;
-        // }
-        // print_r($this->orgArticle);
-        // $this->orgDataCount = count($this->orgArticle);
+        }
+        print_r($this->orgArticle);
+        $this->orgDataCount = count($this->orgArticle);
         // dd($this->orgDataCount);
 
-        // for ($i=0; $i < $this->orgDataCount; $i++) { 
-        //     print_r("Hello");
-        // }
+        for ($i=0; $i < $this->orgDataCount; $i++) { 
+            print_r("Hello");
+        }
 
         // // // dd($this->OrgDataFromUser->id);
         // if($this->userArticle){
@@ -187,22 +106,6 @@ class Frontpage extends Component
         //    ->get();
     }
 
-    public function articlesQuery()
-    {
-        // dd($this->orgTableDataIdArray);
-
-        $this->findOrgData = Article::find($this->orgTableDataIdArray);
-        // dd($this->findOrgData);
-
-        return $this->findOrgData;
-
-        // return Article::select('id','article_title','article_subtitle','article_content','type','image','status','user_id','created_at','updated_at')->get();
-        // $this->isArtcilesInOrganization = DB::table('articles')
-        //                             ->orderBy('id','asc')
-        //                             ->get()
-        //                             ->pluck('user_id');
-        // return $this->isArtcilesInOrganization;
-    }
 
 
     public function mount($urlslug = null)
@@ -224,7 +127,7 @@ class Frontpage extends Component
             }
         }
 
-        $this->title = $data->title;
+        // $this->title = $data->title;
         // $this->content = $data->content;
     }
 
@@ -300,12 +203,6 @@ class Frontpage extends Component
         $this->testFlex = "flex-wrap-reverse";
     }
 
-    public function getArticleAllData()
-    {
-        return Article::select('id','article_title','article_subtitle','article_content','type','image','status','user_id','article_slug','created_at','updated_at')->get();
-        // dd(Article::select('id','article_title','article_subtitle','article_content','type','image','status','user_id','article_slug','created_at','updated_at')->get());
-    }
-
 
     public function render()
     {
@@ -320,12 +217,7 @@ class Frontpage extends Component
             'pageDefaultInterfaceData' => $this->getDefaultInterfaceData(),
             'isFrontPageSlugNull' => $this->isSLugFrontPageNull(),
             'test' => $this->testFlex = "flex-wrap-reverse",
-            'isCurrentSlugInSystemPage' => $this->selectSlugForSystemPagesViews(),
-            'isCurrentSlugInOrganizationPage' => $this->selectSlugForOrganizationPagesViews(),
-            'getArticleOrganizationData' => $this->getArticleOrganization(),
-            'getAllArticleData' => $this->articlesQuery(),
-            'getDsiplayArticleDataOnNewsPage' => $this->getArticleAllData(),
-
+            // 'getArticleOrganizationData' => $this->getArticleOrganization(),
         ])->layout('layouts.frontpage');
     }
 
