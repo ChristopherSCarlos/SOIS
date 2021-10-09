@@ -15,6 +15,7 @@ class Pages extends Component
 {
     use WithPagination;
     public $modalFormVisible = false;
+    public $updatemodalFormVisible = false;
     public $modelConfirmDeleteVisible = false;
     public $modelId;
     public $slug;
@@ -53,6 +54,7 @@ class Pages extends Component
     public function create()
     {
         $this->resetValidation();
+        dd($this);
         $this->validate(); 
         $this->unassignedDefaultHomePage(); 
         $this->unassignedDefaultNotFoundPage();
@@ -117,7 +119,7 @@ class Pages extends Component
         $this->unassignedDefaultHomePage(); 
         $this->unassignedDefaultNotFoundPage(); 
         Page::find($this->modelId)->update($this->modelData());
-        $this->modalFormVisible = false;
+        $this->updatemodalFormVisible = false;
         $this->reset();
     }
 
@@ -126,9 +128,9 @@ class Pages extends Component
         $this->resetValidation();
         $this->reset();
         $this->modelId = $id;
-        $this->modalFormVisible = true;
-        
         $this->loadModel();
+        // dd($this->content);
+        $this->updatemodalFormVisible = true;
     }
 
     public function updatedisSetToDefaultHomePage()

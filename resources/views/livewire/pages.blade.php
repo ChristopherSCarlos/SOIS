@@ -145,16 +145,84 @@
                 <x-jet-secondary-button wire:click="$toggle('modalFormVisible')" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-jet-secondary-button>
-
-                @if($modelId)
-                    <x-jet-secondary-button class="ml-2" wire:click="update" wire:loading.attr="disabled">
-                        {{ __('Update Page') }}
-                    </x-jet-secondary-button>                    
-                @else
                     <x-jet-secondary-button class="ml-2" wire:click="create" wire:loading.attr="disabled">
                         {{ __('Create Page') }}
                     </x-jet-secondary-button>
-                @endif
+
+            </x-slot>
+        </x-jet-dialog-modal>
+
+<!--UPDATE MODALS -->
+    <x-jet-dialog-modal wire:model="updatemodalFormVisible">
+            <x-slot name="title">
+                {{ __('Update Page') }} {{$modelId}}
+            </x-slot>
+
+            <x-slot name="content">
+                <div class="mt-4">
+                    <x-jet-label for="title" value="{{ __('Title') }}" />
+                    <x-jet-input id="title" style="color:red" class="block mt-1 w-full" type="text" wire:model.debounce.800ms="title" required autofocus />
+
+                    @error('title')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+
+                </div>
+                <div class="mt-4">
+                    <x-jet-label for="slug" value="{{ __('Slug') }}" />
+                    <div class="mt-1 flex rounded-md shadow-sm">
+                        <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm">
+                            http://localhost:8000/
+                        </span>
+                        <input wire:model="slug" class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="url-slug">
+                    </div>
+                </div>
+
+                    @error('slug')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+
+                 <div class="mt-4">
+                    <label>
+                        <input class="form-checkbox" type="checkbox" value="{{ $isSetToDefaultHomePage }}" wire:model="isSetToDefaultHomePage"/>
+                        <span class="ml-2 text-sm text-gray-600">Set as the default home page</span>
+                    </label>
+                </div>
+                <div class="mt-4">
+                    <label>
+                        <input class="form-checkbox" type="checkbox" value="{{ $isSetToDefaultNotFoundPage }}" wire:model="isSetToDefaultNotFoundPage"/>
+                        <span class="ml-2 text-sm text-red-600">Set as the default 404 error page</span>
+                    </label>
+                </div>
+
+                <div class="mt-4">
+                    <x-jet-label for="content" value="{{ __('Content') }}" />
+                    <div class="rounded-md shadow-sm">
+                        <div class="mt-1 bg-white">
+                            <div class="body-content" wire:ignore>
+                                <textarea type="text" input="content" id="summernote" class="form-control summernote"></textarea>
+                                <!-- <input id="summernote" class="form-control summernote"/> -->
+                                <!-- <textarea type="text" input="content" id="summernote" class="form-control summernote">{!! $content !!}</textarea> -->
+                                <!-- <input type="text" name="content" id="summernote"  class="form-control"></input> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    @error('content')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+
+                </div>
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('updatemodalFormVisible')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+
+                    <x-jet-secondary-button class="ml-2" wire:click="update" wire:loading.attr="disabled">
+                        {{ __('Update Page') }}
+                    </x-jet-secondary-button>                    
 
             </x-slot>
         </x-jet-dialog-modal>
@@ -182,29 +250,63 @@
 
 <script>
 
-    $('.summernote').summernote({
-    tabsize: 2,
-    height: 200,
-    toolbar: [
-      ['style', ['style']],
-      ['font', ['bold', 'underline', 'clear']],
-      ['color', ['color']],
-      ['para', ['ul', 'ol', 'paragraph']],
-      ['table', ['table']],
-      ['insert', ['link', 'picture', 'video']],
-      ['view', ['fullscreen', 'codeview', 'help']]
-    ],
-    callbacks: {
-      onChange: function(contents, $editable) {
-      @this.set('content', contents);
-    }
-    }
+    $(document).ready(function() {
+        $('.summernote').summernote(
+        // 'pasteHTML',$content
+        {
+        focus: true,
+        tabsize: 2,
+        height: 200,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ],
+        callbacks: {
+          onChange: function(contents, $editable) {
+          @this.set('content', contents);
+        }
+        }
+        });
     });
 
-  // $('#content').summernote({
-  //   tabsize: 2,
-  //   height: 100
-  // });
+
+    // var HTMLstring = $this->content;
+    // $('.summernote').summernote('pasteHTML', HTMLstring);
+
+    // $('.summernote').summernote(
+    // // 'pasteHTML',$content
+    // {
+    // tabsize: 2,
+    // height: 200,
+    // toolbar: [
+    //   ['style', ['style']],
+    //   ['font', ['bold', 'underline', 'clear']],
+    //   ['color', ['color']],
+    //   ['para', ['ul', 'ol', 'paragraph']],
+    //   ['table', ['table']],
+    //   ['insert', ['link', 'picture', 'video']],
+    //   ['view', ['fullscreen', 'codeview', 'help']]
+    // ],
+    // callbacks: {
+    //   onChange: function(contents, $editable) {
+    //   @this.set('content', contents);
+    // }
+    // }
+    // });
+
+// var edit = function() {
+//   $('.click2edit').html({focus: true});
+// };
+
+// var save = function() {
+//   var markup = $('.click2edit').summernote('code');
+//   $('.click2edit').summernote('destroy');
+// };
 </script>
 
 </div>
