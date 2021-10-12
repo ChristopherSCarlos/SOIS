@@ -200,7 +200,7 @@
                     <div class="rounded-md shadow-sm">
                         <div class="mt-1 bg-white">
                             <div class="body-content" wire:ignore>
-                                <textarea type="text" input="content" id="summernote" class="form-control summernote"></textarea>
+                                <textarea type="text" input="content" id="summernote1" class="form-control summernote"></textarea>
                                 <!-- <input id="summernote" class="form-control summernote"/> -->
                                 <!-- <textarea type="text" input="content" id="summernote" class="form-control summernote">{!! $content !!}</textarea> -->
                                 <!-- <input type="text" name="content" id="summernote"  class="form-control"></input> -->
@@ -250,8 +250,10 @@
 
 <script>
 
+    // var con = $this->content;
+
     $(document).ready(function() {
-        $('.summernote').summernote(
+        $('#summernote').summernote(
         // 'pasteHTML',$content
         {
         focus: true,
@@ -275,38 +277,19 @@
     });
 
 
+    $('#summernote1').summernote('editor.pasteHTML', {{$this->content}});
+
     // var HTMLstring = $this->content;
-    // $('.summernote').summernote('pasteHTML', HTMLstring);
+    // $('#summernote1').summernote('pasteHTML', HTMLstring);
 
-    // $('.summernote').summernote(
-    // // 'pasteHTML',$content
-    // {
-    // tabsize: 2,
-    // height: 200,
-    // toolbar: [
-    //   ['style', ['style']],
-    //   ['font', ['bold', 'underline', 'clear']],
-    //   ['color', ['color']],
-    //   ['para', ['ul', 'ol', 'paragraph']],
-    //   ['table', ['table']],
-    //   ['insert', ['link', 'picture', 'video']],
-    //   ['view', ['fullscreen', 'codeview', 'help']]
-    // ],
-    // callbacks: {
-    //   onChange: function(contents, $editable) {
-    //   @this.set('content', contents);
-    // }
-    // }
-    // });
+    // var html = $('#summernote1').summernote('code');
 
-// var edit = function() {
-//   $('.click2edit').html({focus: true});
-// };
+    // $('#summernote1').summernote('code', con);
 
-// var save = function() {
-//   var markup = $('.click2edit').summernote('code');
-//   $('.click2edit').summernote('destroy');
-// };
+    // $('#summernote1').summernote('editor.pasteHTML', '<p> </p>');
+
+    // $('.summernote').summernote('editor.pasteHTML', '<b>hello world</b>');
+    // $('#summernote1').summernote('editor.pasteHTML', $content);
 </script>
 
 </div>

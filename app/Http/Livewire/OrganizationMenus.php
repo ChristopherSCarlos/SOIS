@@ -29,7 +29,7 @@ class OrganizationMenus extends Component
     use WithFileUploads;
     public $modalFormVisible = false;
     public $updatemodalFormVisible = false;
-    // public $viewmodalFormVisible = false;
+    public $viewmodalFormVisible = false;
     public $updateImagemodalFormVisible = false;
     public $modelConfirmDeleteVisible = false;
     
@@ -282,6 +282,15 @@ class OrganizationMenus extends Component
         $this->modelId = $id;
         $this->loadModel();
     }
+
+    public function viewShowModal($id)
+    {
+        $this->resetValidation();
+        $this->reset();
+        $this->viewmodalFormVisible = true;
+        $this->modelId = $id;
+        $this->loadModel();
+    }
     // public function viewShowModal($id)
     // {
     //     $this->resetValidation();
@@ -299,7 +308,7 @@ class OrganizationMenus extends Component
         $this->organization_primary_color = $data->organization_primary_color;
         $this->organization_secondary_color = $data->organization_secondary_color;
         $this->organization_slug = $data->organization_slug;
-        // $this->organization_logo = $data->organization_logo;
+        $this->organization_logo = $data->organization_logo;
     }
 
     public function update()
