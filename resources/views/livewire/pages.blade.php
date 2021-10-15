@@ -48,13 +48,30 @@
                                                 {{ $item->slug }}
                                             </a>
                                         </td>
+                                        <td class="px-6 py-2">
+                                                @if (!empty($item->header_image))
+                                                    <img width="100px" src="{{ asset('/files/' . $item->header_image) }}"/>
+                                                @else
+                                                    No featured image available!
+                                                @endif
+                                        </td>
+                                        <td class="px-6 py-2">
+                                                @if (!empty($item->background_image))
+                                                    <img width="100px" src="{{ asset('/files/' . $item->background_image) }}"/>
+                                                @else
+                                                    No featured image available!
+                                                @endif
+                                        </td>
                                        <!--  <td class="px-6 py-4 text-sm whitespace-no-wrap">
                                             {!! \Illuminate\Support\Str::limit($item->content, 50, '...') !!}
                                             {!! $item->content !!}
                                         </td> -->
                                         <td class="px-6 py-4 text-sm text-right">
                                             <x-jet-button wire:click="updateShowModal({{ $item->id }})">
-                                                {{__('Update')}}
+                                                {{__('Update Details')}}
+                                            </x-jet-button>
+                                            <x-jet-button wire:click="updateImageShowModal({{ $item->id }})">
+                                                {{__('Update Images')}}
                                             </x-jet-button>
 
                                             <x-jet-danger-button wire:click="deleteShowModal({{ $item->id }})">
@@ -106,10 +123,19 @@
                         <input wire:model="slug" class="form-input flex-1 block w-full rounded-none rounded-r-md transition duration-150 ease-in-out sm:text-sm sm:leading-5" placeholder="url-slug">
                     </div>
                 </div>
-
                     @error('slug')
                         <span class="error">{{ $message }}</span>
                     @enderror
+                <div class="mt-4">
+                    <x-jet-label for="header_image" value="{{ __('Header Image') }}" />
+                    <x-jet-input wire:model="header_image" id="header_image" class="block mt-1 w-full" type="file" />
+                    @error('header_image') <span class="error">{{ $message }}</span> @enderror
+                </div>
+                <div class="mt-4">
+                    <x-jet-label for="background_image" value="{{ __('Background Image') }}" />
+                    <x-jet-input wire:model="background_image" id="background_image" class="block mt-1 w-full" type="file" />
+                    @error('background_image') <span class="error">{{ $message }}</span> @enderror
+                </div>
 
                  <div class="mt-4">
                     <label>
@@ -145,9 +171,9 @@
                 <x-jet-secondary-button wire:click="$toggle('modalFormVisible')" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-jet-secondary-button>
-                    <x-jet-secondary-button class="ml-2" wire:click="create" wire:loading.attr="disabled">
-                        {{ __('Create Page') }}
-                    </x-jet-secondary-button>
+                <x-jet-secondary-button class="ml-2" wire:click="create" wire:loading.attr="disabled">
+                    {{ __('Create Page') }}
+                </x-jet-secondary-button>
 
             </x-slot>
         </x-jet-dialog-modal>
@@ -222,6 +248,38 @@
 
                     <x-jet-secondary-button class="ml-2" wire:click="update" wire:loading.attr="disabled">
                         {{ __('Update Page') }}
+                    </x-jet-secondary-button>                    
+
+            </x-slot>
+        </x-jet-dialog-modal>
+
+<!--UPDATE IMAGE MODAL -->
+    <x-jet-dialog-modal wire:model="updateImagemodalFormVisible">
+            <x-slot name="title">
+                {{ __('Update Pages Images') }}
+            </x-slot>
+
+            <x-slot name="content">
+            <div class="mt-4">
+                <x-jet-label for="header_image" value="{{ __('Header Image') }}" />
+                <x-jet-input wire:model="header_image" id="header_image" class="block mt-1 w-full" type="file" />
+                @error('header_image') <span class="error">{{ $message }}</span> @enderror
+            </div>
+            <div class="mt-4">
+                <x-jet-label for="background_image" value="{{ __('Background Image') }}" />
+                <x-jet-input wire:model="background_image" id="background_image" class="block mt-1 w-full" type="file" />
+                @error('background_image') <span class="error">{{ $message }}</span> @enderror
+            </div>
+            
+            </x-slot>
+
+            <x-slot name="footer">
+                <x-jet-secondary-button wire:click="$toggle('updateImagemodalFormVisible')" wire:loading.attr="disabled">
+                    {{ __('Cancel') }}
+                </x-jet-secondary-button>
+
+                    <x-jet-secondary-button class="ml-2" wire:click="Imageupdate" wire:loading.attr="disabled">
+                        {{ __('Update Images') }}
                     </x-jet-secondary-button>                    
 
             </x-slot>

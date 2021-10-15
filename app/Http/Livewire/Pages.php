@@ -2,6 +2,10 @@
 
 namespace App\Http\Livewire;
 
+use Storage;
+use Livewire\WithFileUploads;
+use Intervention\Image\ImageManager;
+
 use Livewire\Component;
 use App\Models\Page;
 
@@ -14,13 +18,19 @@ use Illuminate\Support\STR;
 class Pages extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     public $modalFormVisible = false;
     public $updatemodalFormVisible = false;
+    public $updateImagemodalFormVisible = false;
     public $modelConfirmDeleteVisible = false;
     public $modelId;
     public $slug;
     public $title;
     public $content;
+    public $header_image;
+    public $HeaderName;
+    public $background_image;
+    public $BackgroundName;
     public $isSetToDefaultHomePage;
     public $isSetToDefaultNotFoundPage;
 
@@ -54,7 +64,7 @@ class Pages extends Component
     public function create()
     {
         $this->resetValidation();
-        dd($this);
+        // dd($this);
         $this->validate(); 
         $this->unassignedDefaultHomePage(); 
         $this->unassignedDefaultNotFoundPage();
@@ -63,8 +73,25 @@ class Pages extends Component
             'title' => 'required',
             'slug' => 'required',
             'content' => 'required',
+            'header_image' => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+            'background_image' => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
         ]);
- 
+        $data = [
+            'title' => 'required',
+            'slug' => 'required',
+            'content' => 'required',
+            'header_image' => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+            'background_image' => 'file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+        ];
+
+        $title = $this->title;
+        $slug = $this->slug;
+        $content = $this->content;
+        $header_image = $this->header_image;
+        $background_image = $this->background_image;
+
+
+        //for summernote content
        $content = $this->content;
        $dom = new \DomDocument();
        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
@@ -83,9 +110,25 @@ class Pages extends Component
            $image->setAttribute('src', $image_name);
         }
         $content = $dom->saveHTML();
-        Page::create($this->modelData());
+
+        //for image uploads
+        $HeaderName = time().'.'.$this->header_image->extension();
+        $BackgroundName = time().'.'.$this->background_image->extension();
+        $this->header_image->storeAs('files',$HeaderName, 'imgfolder');
+        $this->background_image->storeAs('files',$BackgroundName, 'imgfolder');
+
+        Page::create([
+            'title' => $title,
+            'slug' => $slug,
+            'content' => $content,
+            'header_image' => $HeaderName,
+            'background_image' => $BackgroundName,
+        ]);
+
+        // Page::create($this->modelData());
         $this->modalFormVisible = false;
         $this->reset(); 
+
     }
 
     public function modelData()
@@ -94,6 +137,8 @@ class Pages extends Component
             'title' => $this->title,
             'slug' => $this->slug,
             'content' => $this->content,
+            // 'header_image' => $this->header_image,
+            // 'background_image' => $this->background_image,
             'is_default_home' => $this->isSetToDefaultHomePage,
             'is_default_not_found' => $this->isSetToDefaultNotFoundPage,
         ];
@@ -187,6 +232,43 @@ class Pages extends Component
         $this->reset();
     }
 
+
+    public function updateImageShowModal($id)
+    {
+        $this->resetValidation();
+        $this->reset();
+        $this->updateImagemodalFormVisible = true;
+        $this->modelId = $id;
+        $this->loadImageModel();
+    }
+
+    public function ImagemodelData()
+    {
+        $HeaderName = time().'.'.$this->header_image->extension();
+        $BackgroundName = time().'.'.$this->background_image->extension();
+        return [
+            'header_image' => $this->header_image->storeAs('files',$HeaderName, 'imgfolder'),
+            'background_image' => $this->background_image->storeAs('files',$BackgroundName, 'imgfolder'),
+            'header_image' => $HeaderName,
+            'background_image' => $BackgroundName,
+
+        ];
+    }
+    public function loadImageModel()
+    {
+        $data = Page::find($this->modelId);
+        $this->header_image = $data->header_image;
+        $this->background_image = $data->background_image;
+    }
+
+    public function Imageupdate()
+    {
+        // dd($this->ImagemodelData());
+        $this->validate(['header_image' => 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',]);
+        $this->validate(['background_image' => 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',]);
+        Page::find($this->modelId)->update($this->ImagemodelData());
+        $this->updateImagemodalFormVisible = false;
+    }
 
 
 

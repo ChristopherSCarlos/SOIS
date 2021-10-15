@@ -254,7 +254,7 @@ class Frontpage extends Component
 
     public function getWebPageTitle()
     {
-        return Page::select('id','is_default_home','is_default_not_found','title','slug','content','landingImage','page_type','created_at','updated_at','primary_color','secondary_color','tertiary_color','quarternary_color','status')->get();
+        return Page::select('id','is_default_home','is_default_not_found','title','slug','content','header_image','page_type','created_at','updated_at','primary_color','secondary_color','tertiary_color','quarternary_color','status')->get();
     }
 
     public function getOrgPageData()
