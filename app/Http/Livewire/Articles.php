@@ -7,6 +7,7 @@ use Livewire\Component;
 use Auth;
 use Storage;
 
+
 use App\Models\User;
 use App\Models\Organization;
 use App\Models\Article;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 class Articles extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     // modal variables
     public $modalCreateNewsFormVisible = false;
     public $modalUpdateNewsFormVisible = false;
@@ -37,9 +39,10 @@ class Articles extends Component
     public $article_title;
     public $article_subtitle;
     public $article_content;
+    public $user_id;
     public $type = 'Featured';
     public $status = 'active';
-    public $image;
+    public $article_header;
     public $data;
     public $articleId;
     public $artId;
@@ -108,7 +111,32 @@ class Articles extends Component
         // dd($this->article_subtitle);
         // dd($this->syncArticleOrganization());
         // dd($this->syncArticleOrganization());
-        Article::create($this->createModel());
+
+
+        // Article::create($this->createModel());
+
+        $article_title = $this->article_title;
+        $article_header = $this->article_header;
+        $article_subtitle = $this->article_subtitle;
+        $article_content = $this->article_content;
+        $type = $this->type;
+        $status = $this->status;
+        $user_id = $this->user_id;
+
+        //for image uploads
+        $HeaderName = time().'.'.$this->article_header->extension();
+        $this->article_header->storeAs('files',$HeaderName, 'imgfolder');
+
+        Article::create([
+            'article_title' => $article_title,
+            'article_header' => $HeaderName,
+            'article_subtitle' => $article_subtitle,
+            'article_content' => $article_content,
+            'type' => $type,
+            'status' => $status,
+            'user_id' => $user_id,
+        ]);
+
         $this->syncArticleOrganization();
         $this->modalCreateNewsFormVisible = false;
         
@@ -123,7 +151,7 @@ class Articles extends Component
             'article_content' => $this->article_content,
             'type' => $this->type,
             'status' => $this->status,
-            'user_id' => $this->userId,
+            'user_id' => $this->user_id,
         ];
     }
     public function syncArticleOrganization()

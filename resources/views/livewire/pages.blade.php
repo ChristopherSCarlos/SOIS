@@ -48,7 +48,7 @@
                                                 {{ $item->slug }}
                                             </a>
                                         </td>
-                                        <td class="px-6 py-2">
+                                        <!-- <td class="px-6 py-2">
                                                 @if (!empty($item->header_image))
                                                     <img width="100px" src="{{ asset('/files/' . $item->header_image) }}"/>
                                                 @else
@@ -61,7 +61,7 @@
                                                 @else
                                                     No featured image available!
                                                 @endif
-                                        </td>
+                                        </td> -->
                                        <!--  <td class="px-6 py-4 text-sm whitespace-no-wrap">
                                             {!! \Illuminate\Support\Str::limit($item->content, 50, '...') !!}
                                             {!! $item->content !!}

@@ -302,7 +302,7 @@ class Frontpage extends Component
 
     public function getArticleAllData()
     {
-        return Article::select('id','article_title','article_subtitle','article_content','type','image','status','user_id','article_slug','created_at','updated_at')->get();
+        return Article::select('id','article_title','article_subtitle','article_content','type','article_header','status','user_id','article_slug','created_at','updated_at')->get();
         // dd(Article::select('id','article_title','article_subtitle','article_content','type','image','status','user_id','article_slug','created_at','updated_at')->get());
     }
 

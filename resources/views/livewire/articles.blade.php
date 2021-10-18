@@ -123,6 +123,11 @@
                     @error('article_title') <span class="error">{{ $message }}</span> @enderror
                 </div>
                 <div class="mt-4">
+                    <x-jet-label for="article_header" value="{{ __('Article Header') }}" />
+                    <x-jet-input wire:model="article_header" id="article_header" class="block mt-1 w-full" type="file" />
+                    @error('article_header') <span class="error">{{ $message }}</span> @enderror
+                </div>
+                <div class="mt-4">
                     <x-jet-label for="article_subtitle" value="{{ __('Article Sub-Title') }}" />
                     <x-jet-input wire:model="article_subtitle" id="article_subtitle" class="block mt-1 w-full" type="text" />
                     @error('article_subtitle') <span class="error">{{ $message }}</span> @enderror

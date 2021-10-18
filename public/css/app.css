@@ -2386,6 +2386,13 @@ h1{
 /*FRONTPAGE NAVBAR DESING*/
 .frontpage-nav-bar-design{
   font-family: 'Exo 2',sans-serif;
+  /*color: white;*/
+  /*text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; */
+  text-shadow: 1px 1px 1px black;
 }
 /*FRONTPAGE NAVBAR DESING*/
 /*FRONTPAGE EVEENTS DESINGS*/
