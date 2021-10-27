@@ -52,6 +52,10 @@ Route::group(['middleware' => [
             return view('admin.articles');
         })->name('articles');
 
+        route::get('/events', function(){
+            return view('admin.events');
+        })->name('events');
+
 
             Route::post('file-upload', [ OrganizationMenus::class, 'fileUploadPost' ])->name('file.upload.post');
             Route::get('createOrg', [ OrganizationMenus::class, 'createOrg' ])->name('createOrg');

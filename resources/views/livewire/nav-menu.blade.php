@@ -29,6 +29,9 @@
                     <x-jet-nav-link href="{{ route('articles') }}" :active="request()->routeIs('articles')" class="text-white hover:text-yellow-100">
                         {{ __('News') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('events') }}" :active="request()->routeIs('events')" class="text-white hover:text-yellow-100">
+                        {{ __('Events') }}
+                    </x-jet-nav-link>
                     @if($roel == 'Super Admin')
                     <x-jet-nav-link href="{{ route('user-permissions') }}" :active="request()->routeIs('user-permissions')" class="text-white hover:text-yellow-100">
                         {{ __('User Permissions') }}

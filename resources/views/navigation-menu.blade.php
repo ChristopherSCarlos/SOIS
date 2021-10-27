@@ -33,6 +33,10 @@
                     <x-jet-nav-link href="{{ route('default-interface') }}" :active="request()->routeIs('default-interface')">
                         {{ __('Default Interface') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('events') }}" :active="request()->routeIs('events')">
+                        {{ __('Events') }}
+                    </x-jet-nav-link>
+
                 </div>
             </div>
 

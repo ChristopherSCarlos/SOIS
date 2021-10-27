@@ -50,7 +50,6 @@
 
 
 
-        @trixassets
         @livewireStyles
 
         <!-- Scripts -->
